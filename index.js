@@ -2,6 +2,7 @@ import { auth, db } from "./config.js";
 import {
   collection,
   addDoc,
+  getDocs,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import {
   signOut,
@@ -33,6 +34,21 @@ signout_btn.addEventListener("click", () => {
       console.log(error.message);
     });
 });
+
+let arr = [];
+async function renderTodos() {
+  const querySnapshot = await getDocs(collection(db, "todos"));
+  querySnapshot.forEach((doc) => {
+    arr.push(doc.data());
+    todo_container.innerHTML += `
+    <p>${doc.data().title}</p>
+    `;
+  });
+}
+
+console.log(arr);
+
+renderTodos();
 
 async function addTodo() {
   if (input_Value.value !== "") {
