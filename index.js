@@ -37,10 +37,10 @@ signout_btn.addEventListener("click", () => {
 async function addTodo() {
   if (input_Value.value !== "") {
     const docRef = await addDoc(collection(db, "todos"), {
-      name: input_Value.value,
-      country: "Japan",
+      title: input_Value.value,
+      uid: auth.currentUser.uid,
     });
-    input_Value.value = '';
+    input_Value.value = "";
     console.log("Document written with ID: ", docRef.id);
   } else {
     alert("Enter the right todo.");

@@ -4,32 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
-    <title>Sign Up</title>
-
+    <link rel="stylesheet" href="./signUp.css">
+    <title>Sign-Up</title>
 </head>
 
 <body>
     <div class="container">
-        <div class="wrapper">
-            <div class="title"><span>SignUp Form</span></div>
-            <form>
-                <div class="row">
-                    <i class="fas fa-user"></i>
-                    <input type="email" placeholder="Email or Phone" id="email" required>
-                </div>
-                <div class="row">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Password" id="password" required>
-                </div>
-                <div class="row button">
-                    <input type="submit" value="SignUp">
-                </div>
-                <div class="signup-link">Already a member? <a href="./login.html">Login now</a></div>
-            </form>
+        <div class="right">
+            <div class="form">
+                <h3>Create your account</h3>
+                <form>
+                    <div class="inputBox">
+                        <p>Name</p>
+                        <input type="text" id="name" class="input" placeholder="Enter your name here." required>
+                    </div>
+                    <div class="inputBox">
+                        <p>Email</p>
+                        <input type="email" id="email" class="input" placeholder="Enter your email here." required>
+                    </div>
+                    <div class="inputBox">
+                        <p>Password</p>
+                        <input type="password" id="password" class="input" placeholder="Enter your password here."
+                            required>
+                    </div>
+                    <input type="submit" id="submit" value="Sign-Up">
+                    <p class="text">- OR - </p>
+                    <span class="text">Already have an account?</span>
+                    <a id="signUp" href="./login.html">Login</a>
+                </form>
+            </div>
+        </div>
+        <div class="left">
+            <img src="./images/signup.png" class="loginImage" alt="loginImage">
         </div>
     </div>
 
