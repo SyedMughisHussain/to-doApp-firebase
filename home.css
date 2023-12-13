@@ -1,0 +1,90 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .navBar{
+    padding: 10px;
+    background-color: rgb(105, 231, 207);
+    display: flex;
+    justify-content: end;
+  }
+
+  .signout{
+    padding: 5px;
+    background-color: powderblue;
+    border-color: purple;
+    cursor: pointer;
+  }
+  
+  .container {
+    height: 100vh;
+    background: no-repeat linear-gradient(rgb(105, 231, 207), rgb(77, 136, 228));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .todo-container {
+    height: fit-content;
+    width: fit-content;
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .add-button {
+    padding: 12px;
+    background-color: rgb(141, 74, 231);
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .inputValue {
+    margin-top: 25px;
+    width: 280px;
+  }
+  .inputValue {
+    padding: 10px;
+  }
+  
+  .todoContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgb(243, 241, 244);
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+  
+  .last-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .remove-btn {
+    padding: 5px;
+    border: none;
+    background-color: rgb(141, 74, 231);
+    color: white;
+  }
+  
+  .edit-btn {
+    background-color: rgb(141, 74, 231);
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+  }
+  
+  .delete-btn {
+    background-color: red;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+  }
