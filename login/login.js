@@ -1,4 +1,4 @@
-import { auth } from "./config.js";
+import { auth } from "../config.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const email = document.querySelector("#email");
@@ -13,7 +13,7 @@ form.addEventListener("submit", (event) => {
     const user = userCredential.user;
     console.log(user.email);
     console.log(user.uid);
-    window.location = "index.html";
+    window.location = "../home/index.html";
   })
   .catch((error) => {
     const errorCode = error.code;

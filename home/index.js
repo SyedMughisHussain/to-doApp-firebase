@@ -1,4 +1,4 @@
-import { auth, db } from "./config.js";
+import { auth, db } from "../config.js";
 import {
   collection,
   addDoc,
@@ -25,14 +25,14 @@ onAuthStateChanged(auth, (user) => {
     console.log(uid);
     renderTodos();
   } else {
-    window.location = "login.html";
+    window.location = "../login/login.html";
   }
 });
 
 signout_btn.addEventListener("click", () => {
   signOut(auth)
     .then(() => {
-      window.location = "login.html";
+      window.location = "../home/index.html";
     })
     .catch((error) => {
       console.log(error.message);

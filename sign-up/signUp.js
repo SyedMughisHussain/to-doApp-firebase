@@ -1,4 +1,4 @@
-import { auth, db } from "./config.js";
+import { auth, db } from "../config.js";
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -20,7 +20,7 @@ form.addEventListener("submit", (event) => {
                     uid: user.uid,
                 });
                 console.log("Document written with ID: ", docRef.id);
-                window.location = 'login.html'
+                window.location = '../login/login.html'
             
       } catch (error) {
         console.log(error);
