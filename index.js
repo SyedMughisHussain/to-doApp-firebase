@@ -1,4 +1,4 @@
-import { auth, db } from "../config.js";
+import { auth, db } from "./config.js";
 import {
   collection,
   addDoc,
@@ -23,7 +23,6 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
     console.log(uid);
-    renderTodos();
   } else {
     window.location = "../login/login.html";
   }
@@ -32,7 +31,7 @@ onAuthStateChanged(auth, (user) => {
 signout_btn.addEventListener("click", () => {
   signOut(auth)
     .then(() => {
-      window.location = "../home/index.html";
+      window.location = "./index.html";
     })
     .catch((error) => {
       console.log(error.message);
@@ -122,3 +121,5 @@ submit_btn.addEventListener("click", addTodo);
 function lenghtOfPendingTask(arr) {
   paragra.innerHTML = `You have ${arr.length} pending tasks.`;
 }
+
+renderTodos();
