@@ -63,7 +63,6 @@ function render() {
     btn.addEventListener("click", async () => {
       console.log("delete called", arr[index]);
       await deleteDoc(doc(db, "todos", arr[index].docId)).then(() => {
-        console.log("Post Deleted");
         arr.splice(index, 1);
         render();
         lenghtOfPendingTask(arr);
@@ -74,11 +73,11 @@ function render() {
   edit_btn.forEach((btn, index) => {
     btn.addEventListener("click", async () => {
       console.log("update called", arr[index]);
-      const updatedTitle = prompt("enter new todo Value");
+      const newValue = prompt("Enter new todo Value");
       await updateDoc(doc(db, "todos", arr[index].docId), {
-        title: updatedTitle,
+        title: newValue,
       });
-      arr[index].title = updatedTitle;
+      arr[index].title = newValue;
       render();
       lenghtOfPendingTask(arr);
     });
