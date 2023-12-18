@@ -22,7 +22,7 @@ onAuthStateChanged(auth, (user) => {
     console.log(uid);
     renderTodos(uid);
   } else {
-    window.location = "../login/login.html";
+    window.location = "./login.html";
   }
 });
 
@@ -52,14 +52,6 @@ async function renderTodos(userId) {
     // console.log(doc.id, " => ", doc.data());
   });
   render();
-
-
-  // const querySnapshot = await getDocs(collection(db, "todos"));
-  // querySnapshot.forEach((doc) => {
-  //   arr.push(doc.data());
-  // });
-  // render();
-  // console.log(arr);
 }
 
 async function addTodo() {
@@ -83,7 +75,7 @@ submit_btn.addEventListener("click", addTodo);
 signout_btn.addEventListener("click", () => {
   signOut(auth)
     .then(() => {
-      window.location = "./index.html";
+      window.location = "./login.html";
     })
     .catch((error) => {
       console.log(error.message);
