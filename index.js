@@ -3,9 +3,8 @@ import {
   collection,
   addDoc,
   getDocs,
-  deleteDoc,
-  doc,
-  updateDoc,
+  query,
+  where,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import {
   signOut,
@@ -15,34 +14,22 @@ import {
 const input_Value = document.querySelector(".inputValue");
 const submit_btn = document.querySelector(".add-button");
 const todo_container = document.querySelector(".todos");
-const clearAllTodo_btn = document.querySelector(".remove-btn");
 const signout_btn = document.querySelector(".signout");
-const paragra = document.querySelector(".paragra");
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
     console.log(uid);
+    renderTodos(uid);
   } else {
     window.location = "../login/login.html";
   }
-});
-
-signout_btn.addEventListener("click", () => {
-  signOut(auth)
-    .then(() => {
-      window.location = "./index.html";
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
 });
 
 let arr = [];
 
 function render() {
   todo_container.innerHTML = "";
-
   arr.forEach((item) => {
     todo_container.innerHTML += `
       <div class="todoContainer">
@@ -54,42 +41,25 @@ function render() {
       </div>
       `;
   });
-
-  const edit_btn = document.querySelectorAll(".edit-btn");
-  const delete_btn = document.querySelectorAll(".delete-btn");
-
-  delete_btn.forEach((btn, index) => {
-    btn.addEventListener("click", async () => {
-      console.log("delete called", arr[index]);
-      await deleteDoc(doc(db, "todos", arr[index].docId)).then(() => {
-        arr.splice(index, 1);
-        render();
-        lenghtOfPendingTask(arr);
-      });
-    });
-  });
-
-  edit_btn.forEach((btn, index) => {
-    btn.addEventListener("click", async () => {
-      console.log("update called", arr[index]);
-      const newValue = prompt("Enter new todo Value");
-      await updateDoc(doc(db, "todos", arr[index].docId), {
-        title: newValue,
-      });
-      arr[index].title = newValue;
-      render();
-      lenghtOfPendingTask(arr);
-    });
-  });
 }
 
-async function renderTodos() {
-  const querySnapshot = await getDocs(collection(db, "todos"));
+async function renderTodos(userId) {
+  const q = query(collection(db, "todos"), where("uid", "==", userId));
+  const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
-    arr.push({ ...doc.data(), docId: doc.id });
+    // doc.data() is never undefined for query doc snapshots
+    arr.push(doc.data());
+    // console.log(doc.id, " => ", doc.data());
   });
   render();
-  lenghtOfPendingTask(arr);
+
+
+  // const querySnapshot = await getDocs(collection(db, "todos"));
+  // querySnapshot.forEach((doc) => {
+  //   arr.push(doc.data());
+  // });
+  // render();
+  // console.log(arr);
 }
 
 async function addTodo() {
@@ -99,27 +69,23 @@ async function addTodo() {
       uid: auth.currentUser.uid,
     };
     const docRef = await addDoc(collection(db, "todos"), todo);
+    arr.push(todo);
+    render();
     input_Value.value = "";
     console.log("Document written with ID: ", docRef.id);
-    lenghtOfPendingTask(arr);
   } else {
     alert("Enter the right todo.");
   }
 }
 
-clearAllTodo_btn.addEventListener("click", async () => {
-  const collectionRef = collection(db, "todos");
-  const querySnapshot = await getDocs(collectionRef);
-  querySnapshot.forEach(async (doc) => {
-    await deleteDoc(doc.ref);
-  });
-  console.log("All documents deleted successfully.");
-});
-
 submit_btn.addEventListener("click", addTodo);
 
-function lenghtOfPendingTask(arr) {
-  paragra.innerHTML = `You have ${arr.length} pending tasks.`;
-}
-
-renderTodos();
+signout_btn.addEventListener("click", () => {
+  signOut(auth)
+    .then(() => {
+      window.location = "./index.html";
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+});
